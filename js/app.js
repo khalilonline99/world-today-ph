@@ -17,7 +17,6 @@ const navMenu = (data) => {
     }
 
     
-    
     // By default news show after fetch
 
         const urlTwo = `https://openapi.programming-hero.com/api/news/category/${alldata.category_id}`;
@@ -36,8 +35,8 @@ const navMenu = (data) => {
 
             for (newsFromCategory of news.data ){
 
-                
-                // console.log(newsFromCategory);
+        
+
                 const newsContainer = document.getElementById('news-container');
                 const newsDiv = document.createElement('div');
                 newsDiv.classList.add("d-flex", "p-2", "bg-white", "my-2", "rounded", "container-click");
@@ -67,10 +66,6 @@ const navMenu = (data) => {
         }
     
     }
-
-
-   
-    
 
     const toggleSpinner = (isLoading) => {
         const loaderSection = document.getElementById('loading-icon');

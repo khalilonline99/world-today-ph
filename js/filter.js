@@ -9,9 +9,20 @@ const todaysPick = () => {
     const todaysPickSelection = (datas) => {
         
         const newsCategory = datas.news_category
-        for (data of newsCategory) {
 
-            console.log(data)
+        for (data of newsCategory) {
+            fetch(`https://openapi.programming-hero.com/api/news/category/${data.category_id}`)
+            .then(resp => resp.json())
+            .then(news => pickedNews(news))
+            // .then(news => newsInCategory(news))
+
+            const pickedNews = news => {
+
+                for (allNews of news.data){
+                    console.log(allNews.others_info);
+
+                }
+            }
         }
         
     }
