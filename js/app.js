@@ -75,6 +75,9 @@ const navMenu = (data) => {
                 <div class="card-body py-3">
                 <h4 class="card-title ms-3">${getnews.title}</h4>
                 <p class="card-text ms-3">${getnews.details.slice(0,250)}</p>
+                <button type="button" class="btn btn-primary mx-3 my-3" style="max-width: 10rem"" onClick="readMore('${getnews._id}')" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Read More..
+                </button>
                 </div>
                 `;
                 newsContainer.appendChild(newsDiv);
@@ -95,7 +98,7 @@ const readMore = (newsID) => {
 
     const readNews = (newsId) => {
 
-        console.log(newsId.data[0].details);
+        console.log(newsId.data[0]);
         const readMoreDiv = document.getElementById('news-body');
         readMoreDiv.innerText = `${newsId.data[0].details}`;
 
