@@ -10,7 +10,7 @@ const navMenu = (data) => {
         const menu = document.createElement('li');
         // menu.classList.add('')
         menu.innerHTML = `
-            <a id="news-${alldata.category_id}" style="text-decoration: none;" class="link-dark me-2" href="#" onclick="newsIdSend(${alldata.category_id})">${alldata.category_name}</a>
+            <a id="news-${alldata.category_id}" style="text-decoration: none;" class="link-dark me-5" href="#" onclick="newsIdSend(${alldata.category_id})">${alldata.category_name}</a>
         `;
         menuContainer.appendChild(menu);
         // console.log(alldata);
@@ -41,6 +41,10 @@ const navMenu = (data) => {
                 <img class="rounded-circle ms-3" style="max-width: 30px; min-width: 30px;" src="${newsFromCategory.author.img}" alt="news-image">
                 <div class="ms-2">${newsFromCategory.author.name ? newsFromCategory.author.name : "Author not found"}</div>
                 </div>
+                
+                <button type="button" class="btn btn-primary mx-3 my-3" style="max-width: 10rem"" onClick="readMore('${newsFromCategory._id}')" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Read More..
+                </button>
                 </div>
                 `;
                 newsContainer.appendChild(newsDiv);
@@ -83,11 +87,25 @@ const navMenu = (data) => {
 
 
 
-    const newsContainer = document.getElementById('news-container');
-    // newsContainer.slice(0,3);
+const readMore = (newsID) => {
 
+    fetch(`https://openapi.programming-hero.com/api/news/${newsID}`)
+    .then ( resp => resp.json())
+    .then (newsId => readNews(newsId))
 
-    document.getElementsByClassName('container-click').addEventListener('click', function() {
-        console.log('clicked');
-    });
+    const readNews = (newsId) => {
+
+        console.log(newsId.data[0].details);
+        const readMoreDiv = document.getElementById('news-body');
+        readMoreDiv.innerText = `${newsId.data[0].details}`;
+
+        /* const newDivReadMore = document.createElement('div');
+        newDivReadMore.innerHTML = `
+        
+        `;
+        readMoreDiv.appendChild(newDivReadMore); */
+    }
+
     
+    
+}
