@@ -82,4 +82,5 @@ const navMenu = (data) => {
 
 
 
-
+    const newsContainer = document.getElementById('news-container');
+    newsContainer.slice(0,3);
