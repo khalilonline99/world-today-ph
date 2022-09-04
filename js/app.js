@@ -44,11 +44,12 @@ const navMenu = (data) => {
                 <div class="d-flex flex-column">
                 <div class="card-body py-3">
                 <h4 class="card-title ms-3">${newsFromCategory.title}</h4>
-                <p class="card-text ms-3">${newsFromCategory.details.slice(0,250)}</p>
+                <p class="card-text ms-3">${newsFromCategory.details.slice(0,300)}</p>
                 </div>
                 <div class="d-flex flex-row">
                 <img class="rounded-circle ms-3" style="max-width: 30px; min-width: 30px;" src="${newsFromCategory.author.img}" alt="news-image">
-                <div class="ms-2">${newsFromCategory.author.name ? newsFromCategory.author.name : "Author not found"}</div>
+                <div class="ms-2">Author: ${newsFromCategory.author.name ? newsFromCategory.author.name : "Author not found"}</div>
+                <div class="ms-5">Total View: ${newsFromCategory.total_view}</div>
                 </div>
                 
                 <button type="button" class="btn btn-primary mx-3 my-3" style="max-width: 10rem"" onClick="readMore('${newsFromCategory._id}')" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -60,12 +61,13 @@ const navMenu = (data) => {
             }
             
             
+            // console.log(newsFromCategory);
         }
     
     }
-
-    // on click in menu 
+    // on click in menu
     const newsIdSend = (idFromCategory, nameFromCategory) => {
+
         // console.log(idFromCategory, nameFromCategory)
         const urlNewsCaterogy = `https://openapi.programming-hero.com/api/news/category/${idFromCategory}`;
         fetch(urlNewsCaterogy)
@@ -73,7 +75,7 @@ const navMenu = (data) => {
         .then(fromNews => newsByCategory(fromNews, nameFromCategory))
 
         const newsByCategory = (news, nameFromCategory) => {
-            // console.log(news.data.length, nameFromCategory);
+            
             const newsContainer = document.getElementById('news-container');
             newsContainer.innerHTML = ``;
 
@@ -104,7 +106,7 @@ const navMenu = (data) => {
                 </div>
                 `;
                 newsContainer.appendChild(newsDiv);
-                console.log(getnews); 
+                
             }  
         }
                  
@@ -112,26 +114,30 @@ const navMenu = (data) => {
     }
 
 
+    //---- modal title and body ----//
 
-const readMore = (newsID) => {
+    const readMore = (newsID) => {
 
-    fetch(`https://openapi.programming-hero.com/api/news/${newsID}`)
-    .then ( resp => resp.json())
-    .then (newsId => readNews(newsId))
+        fetch(`https://openapi.programming-hero.com/api/news/${newsID}`)
+        .then ( resp => resp.json())
+        .then (newsId => readNews(newsId))
 
-    const readNews = (newsId) => {
+        const readNews = (newsId) => {
 
-        console.log(newsId.data[0]);
-        const readMoreDiv = document.getElementById('news-body');
-        readMoreDiv.innerText = `${newsId.data[0].details}`;
+            // console.log(newsId.data[0]);
+            const modalTitle = document.getElementById('staticBackdropLabel');
+            modalTitle.innerText = `${newsId.data[0].title}`;
 
-        /* const newDivReadMore = document.createElement('div');
-        newDivReadMore.innerHTML = `
+            const readMoreDiv = document.getElementById('news-body');
+            readMoreDiv.innerText = `${newsId.data[0].details}`;
+
+            /* const newDivReadMore = document.createElement('div');
+            newDivReadMore.innerHTML = `
+            
+            `;
+            readMoreDiv.appendChild(newDivReadMore); */
+        }
+
         
-        `;
-        readMoreDiv.appendChild(newDivReadMore); */
+        
     }
-
-    
-    
-}
