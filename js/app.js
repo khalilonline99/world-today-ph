@@ -29,7 +29,7 @@ const navMenu = (data) => {
                 // console.log(newsFromCategory);
                 const newsContainer = document.getElementById('news-container');
                 const newsDiv = document.createElement('div');
-                newsDiv.classList.add("d-flex", "p-3");
+                newsDiv.classList.add("d-flex", "p-2", "bg-white", "my-2", "rounded");
                 newsDiv.innerHTML = `
                 <div class="card" style="max-width: 252px; min-width: 252px;"><img class="card-img-top" src="${newsFromCategory.image_url}" alt="news-image"></div>
                 <div class="d-flex flex-column">
@@ -64,7 +64,7 @@ const navMenu = (data) => {
             newsContainer.innerHTML = ``;
             for (getnews of news.data){
                 const newsDiv = document.createElement('div');
-                newsDiv.classList.add("d-flex", "p-3");
+                newsDiv.classList.add("d-flex","p-2", "bg-white", "my-2", "rounded");
                 newsDiv.innerHTML = `
                 <div class="card" style="max-width: 252px; min-width: 252px;"><img class="card-img-top" src="${getnews.image_url}" alt="news-image"></div>
                 <div class="card-body py-3">
