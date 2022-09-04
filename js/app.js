@@ -29,7 +29,7 @@ const navMenu = (data) => {
                 // console.log(newsFromCategory);
                 const newsContainer = document.getElementById('news-container');
                 const newsDiv = document.createElement('div');
-                newsDiv.classList.add("d-flex", "p-2", "bg-white", "my-2", "rounded");
+                newsDiv.classList.add("d-flex", "p-2", "bg-white", "my-2", "rounded", "container-click");
                 newsDiv.innerHTML = `
                 <div class="card" style="max-width: 252px; min-width: 252px;"><img class="card-img-top" src="${newsFromCategory.image_url}" alt="news-image"></div>
                 <div class="d-flex flex-column">
@@ -37,8 +37,9 @@ const navMenu = (data) => {
                 <h4 class="card-title ms-3">${newsFromCategory.title}</h4>
                 <p class="card-text ms-3">${newsFromCategory.details.slice(0,250)}</p>
                 </div>
-                <div>
+                <div class="d-flex flex-row">
                 <img class="rounded-circle ms-3" style="max-width: 30px; min-width: 30px;" src="${newsFromCategory.author.img}" alt="news-image">
+                <div class="ms-2">${newsFromCategory.author.name ? newsFromCategory.author.name : "Author not found"}</div>
                 </div>
                 </div>
                 `;
@@ -64,7 +65,7 @@ const navMenu = (data) => {
             newsContainer.innerHTML = ``;
             for (getnews of news.data){
                 const newsDiv = document.createElement('div');
-                newsDiv.classList.add("d-flex","p-2", "bg-white", "my-2", "rounded");
+                newsDiv.classList.add("d-flex","p-2", "bg-white", "my-2", "rounded", "container-click");
                 newsDiv.innerHTML = `
                 <div class="card" style="max-width: 252px; min-width: 252px;"><img class="card-img-top" src="${getnews.image_url}" alt="news-image"></div>
                 <div class="card-body py-3">
@@ -83,6 +84,10 @@ const navMenu = (data) => {
 
 
     const newsContainer = document.getElementById('news-container');
-    newsContainer.slice(0,3);
     // newsContainer.slice(0,3);
+
+
+    document.getElementsByClassName('container-click').addEventListener('click', function() {
+        console.log('clicked');
+    });
     
