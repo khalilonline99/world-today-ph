@@ -9,32 +9,43 @@ const navMenu = (data) => {
         const menu = document.createElement('li');
         // menu.classList.add('')
         menu.innerHTML = `
-            <a style="text-decoration: none;" class="link-dark me-2" href="https://openapi.programming-hero.com/api/news/category/${alldata.category_id}" onclick="newsIdSend(${alldata.category_id});">${alldata.category_name}</a>
+            <a id="news-${alldata.category_id}" style="text-decoration: none;" class="link-dark me-2" href="https://openapi.programming-hero.com/api/news/category/${alldata.category_id}" onclick="newsIdSend(${alldata.category_id})">${alldata.category_name}</a>
         `;
         menuContainer.appendChild(menu);
-        console.log(alldata);
+        // console.log(alldata);
     }
-    
-    const newsIdSend = (idFromCategory) => {
-        const url2 = 'https://openapi.programming-hero.com/api/news/category/${idFromCategory}';
-        fetch(url2)
+   
+        const urlTwo = `https://openapi.programming-hero.com/api/news/category/${alldata.category_id}`;
+        fetch(urlTwo)
         .then(resp => resp.json())
-        .then(news => console.log(news))
+        .then(news => neewsInCategory(news))
     
-        const newsContainer = document.getElementById('news-container');
-            const news = document.createElement('div');
-            news.innerHTML = `
-                <div>
-                <img src="image-link" alt="">
+        const neewsInCategory = (news) => {
+
+            for (newsFromCategory of news.data ){
+                console.log(newsFromCategory);
+                const newsContainer = document.getElementById('news-container');
+                const newsDiv = document.createElement('div');
+                newsDiv.classList.add("d-flex", "p-3");
+                newsDiv.innerHTML = `
+                <div class="card" style="max-width: 252px; min-width: 252px;"><img class="card-img-top" src="${newsFromCategory.image_url}" alt="news-image"></div>
+                <div class="card-body py-3">
+                <h2 class="card-title ms-3">${newsFromCategory.title}</h2>
+                <p class="card-text ms-3">${newsFromCategory.details}</p>
                 </div>
-                <div>
-                <h2>Heading</h2>
-                <p>paragraph here</p>
-                </div>
-            `;
-            newsContainer.appendChild(news);
-    
+                `;
+                newsContainer.appendChild(newsDiv);
+            }
+            
+
+        }
+
     
     }
+
+
+const newsIdSend = (idFromCategory) => {
+
+
 }
 
