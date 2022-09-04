@@ -15,6 +15,7 @@ const navMenu = (data) => {
         menuContainer.appendChild(menu);
         // console.log(alldata);
     }
+
     
     
     // By default news show after fetch
@@ -26,6 +27,7 @@ const navMenu = (data) => {
     
         const newsInCategory = (news) => {
 
+
             // total numbers of news
             const newsNumber = document.getElementById('numbers-of-news');
             newsNumber.innerHTML = `
@@ -34,13 +36,13 @@ const navMenu = (data) => {
 
             for (newsFromCategory of news.data ){
 
-
+                
                 // console.log(newsFromCategory);
                 const newsContainer = document.getElementById('news-container');
                 const newsDiv = document.createElement('div');
                 newsDiv.classList.add("d-flex", "p-2", "bg-white", "my-2", "rounded", "container-click");
                 newsDiv.innerHTML = `
-                <div class="card" style="width: 350px; height: 200px; object-fit: fill;"><img class="card-img-top" src="${newsFromCategory.image_url}" alt="news-image"></div>
+                <div class="card" style="max-width: 350px; height: 200px; object-fit: fill;"><img class="card-img-top" src="${newsFromCategory.image_url}" alt="news-image"></div>
                 <div class="d-flex flex-column">
                 <div class="card-body py-3">
                 <h4 class="card-title ms-3">${newsFromCategory.title}</h4>
@@ -65,8 +67,25 @@ const navMenu = (data) => {
         }
     
     }
+
+
+   
+    
+
+    const toggleSpinner = (isLoading) => {
+        const loaderSection = document.getElementById('loading-icon');
+        if (isLoading) {
+            loaderSection.classList.remove('d-none');
+        }
+        else{
+            loaderSection.classList.add('d-none');
+        }
+    }
+
+
     // on click in menu
     const newsIdSend = (idFromCategory, nameFromCategory) => {
+        toggleSpinner(true);
 
         // console.log(idFromCategory, nameFromCategory)
         const urlNewsCaterogy = `https://openapi.programming-hero.com/api/news/category/${idFromCategory}`;
@@ -90,7 +109,7 @@ const navMenu = (data) => {
                 const newsDiv = document.createElement('div');
                 newsDiv.classList.add("d-flex","p-2", "bg-white", "my-2", "rounded", "container-click");
                 newsDiv.innerHTML = `
-                <div class="card" style="width: 350px; height: 200px; object-fit: fill;"><img class="card-img-top" src="${getnews.image_url}" alt="news-image"></div>
+                <div class="card" style="max-width: 350px; height: 200px; object-fit: fill;"><img class="card-img-top" src="${getnews.image_url}" alt="news-image"></div>
                 <div class="card-body py-3">
                 <h4 class="card-title ms-3">${getnews.title}</h4>
                 <p class="card-text ms-3">${getnews.details.slice(0,250)}</p>
@@ -108,6 +127,7 @@ const navMenu = (data) => {
                 newsContainer.appendChild(newsDiv);
                 
             }  
+            toggleSpinner(false);
         }
                  
     
